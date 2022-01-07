@@ -26,13 +26,13 @@ export class HomePageState {
 
     if (res instanceof Error) {
       patchState({
-        error: res,
+        errorMessage: res.message,
         isLoading: false,
         user: undefined
       });
     } else {
       patchState({
-        error: undefined,
+        errorMessage: undefined,
         isLoading: false,
         user
       });
@@ -47,13 +47,13 @@ export class HomePageState {
 
     if (res instanceof Error) {
       patchState({
-        error: res,
+        errorMessage: res.message,
         isLoading: false,
         user: undefined
       });
     } else {
       patchState({
-        error: undefined,
+        errorMessage: undefined,
         isLoading: false,
         user: res
       });
@@ -65,7 +65,9 @@ export class HomePageState {
     const currentUser = getState().user;
 
     if (!currentUser) {
-      patchState({ error: new Error('No user in state') });
+      patchState({
+        errorMessage: 'No user in state'
+      });
       return;
     }
 
@@ -75,12 +77,12 @@ export class HomePageState {
 
     if (res instanceof Error) {
       patchState({
-        error: res,
+        errorMessage: res.message,
         isLoading: false,
       });
     } else {
       patchState({
-        error: undefined,
+        errorMessage: undefined,
         isLoading: false,
         user: undefined
       });

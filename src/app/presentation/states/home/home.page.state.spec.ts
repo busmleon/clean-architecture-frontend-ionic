@@ -36,7 +36,7 @@ describe('state: home', () => {
     it('should create the user', async () => {
       mockUser = new UserEntity({ id: '1' });
       expectedStateModel = {
-        error: undefined,
+        errorMessage: undefined,
         isLoading: false,
         user: mockUser
       };
@@ -51,7 +51,7 @@ describe('state: home', () => {
     it('should write the error to the state if creating the user fails', async () => {
       const mockError = new Error('failed creating user');
       expectedStateModel = {
-        error: mockError,
+        errorMessage: mockError.message,
         isLoading: false,
         user: undefined
       };
@@ -73,7 +73,7 @@ describe('state: home', () => {
     it('should get the user', async () => {
       mockUser = new UserEntity({ id: '1' });
       expectedStateModel = {
-        error: undefined,
+        errorMessage: undefined,
         isLoading: false,
         user: mockUser
       };
@@ -88,7 +88,7 @@ describe('state: home', () => {
     it('should write the error to the state if getting the user fails', async () => {
       const mockError = new Error('failed getting user');
       expectedStateModel = {
-        error: mockError,
+        errorMessage: mockError.message,
         isLoading: false,
         user: undefined
       };
@@ -110,7 +110,7 @@ describe('state: home', () => {
     it('should delete the user', async () => {
       mockUser = new UserEntity({ id: '1' });
       expectedStateModel = {
-        error: undefined,
+        errorMessage: undefined,
         isLoading: false,
         user: undefined
       };
@@ -133,7 +133,7 @@ describe('state: home', () => {
       mockUser = new UserEntity({ id: '1' });
       const mockError = new Error('failed getting user');
       expectedStateModel = {
-        error: mockError,
+        errorMessage: mockError.message,
         isLoading: false,
         user: mockUser
       };
@@ -155,7 +155,7 @@ describe('state: home', () => {
     it('should write an error to the state if there is currently no user to be deleted', async () => {
       const mockError = new Error('No user in state');
       expectedStateModel = {
-        error: mockError,
+        errorMessage: mockError.message,
         isLoading: false,
         user: undefined
       };
