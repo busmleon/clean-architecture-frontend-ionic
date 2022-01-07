@@ -22,10 +22,8 @@ describe('feature: manage-users', () => {
   describe('use case: get user', () => {
     let useCase: GetUserUseCase;
     let mockUser: UserEntity;
-    let dataSourceGetUserSpy: jasmine.Spy;
     beforeEach(() => {
       useCase = TestBed.inject(GetUserUseCase);
-      dataSourceGetUserSpy = spyOn(dataSource, 'getUser');
     });
     it('should be defined', () => {
       expect(useCase).toBeDefined();
@@ -33,7 +31,7 @@ describe('feature: manage-users', () => {
     describe('success', () => {
       it('should get the user', async () => {
         mockUser = new UserEntity({ id: '1' });
-        dataSourceGetUserSpy.and.resolveTo(mockUser);
+        spyOn(dataSource, 'getUser').and.resolveTo(mockUser);
 
         const res = await useCase.execute();
 
@@ -43,7 +41,7 @@ describe('feature: manage-users', () => {
     });
     describe('failure', () => {
       it('should return an error when the data source fails fetching the user from the backend', async () => {
-        dataSourceGetUserSpy.and.throwError(new Error());
+        spyOn(dataSource, 'getUser').and.throwError(new Error());
 
         const res = await useCase.execute();
 
@@ -51,7 +49,7 @@ describe('feature: manage-users', () => {
         expect(res).toBeInstanceOf(Error);
       });
       it('should return an error when the data source rejects the promise', async () => {
-        dataSourceGetUserSpy.and.rejectWith();
+        spyOn(dataSource, 'getUser').and.rejectWith();
 
         const res = await useCase.execute();
 
@@ -61,7 +59,7 @@ describe('feature: manage-users', () => {
       describe('user is invalid', () => {
         it('should return an error when the user is undefined', async () => {
           mockUser = undefined;
-          dataSourceGetUserSpy.and.resolveTo(mockUser);
+          spyOn(dataSource, 'getUser').and.resolveTo(mockUser);
 
           const res = await useCase.execute();
 
@@ -70,7 +68,7 @@ describe('feature: manage-users', () => {
         });
         it('should return an error when the users id is undefined', async () => {
           mockUser = new UserEntity({ id: undefined });
-          dataSourceGetUserSpy.and.resolveTo(mockUser);
+          spyOn(dataSource, 'getUser').and.resolveTo(mockUser);
 
           const res = await useCase.execute();
 
@@ -79,7 +77,7 @@ describe('feature: manage-users', () => {
         });
         it('should return an error when the users id is empty', async () => {
           mockUser = new UserEntity({ id: '' });
-          dataSourceGetUserSpy.and.resolveTo(mockUser);
+          spyOn(dataSource, 'getUser').and.resolveTo(mockUser);
 
           const res = await useCase.execute();
 
@@ -92,10 +90,8 @@ describe('feature: manage-users', () => {
   describe('use case: create user', () => {
     let useCase: CreateUserUseCase;
     let mockUser: UserEntity;
-    let dataSourceCreateUserSpy: jasmine.Spy;
     beforeEach(() => {
       useCase = TestBed.inject(CreateUserUseCase);
-      dataSourceCreateUserSpy = spyOn(dataSource, 'createUser');
     });
     it('should be defined', () => {
       expect(useCase).toBeDefined();
@@ -103,7 +99,7 @@ describe('feature: manage-users', () => {
     describe('success', () => {
       it('should create the user', async () => {
         mockUser = new UserEntity({ id: '1' });
-        dataSourceCreateUserSpy.and.resolveTo();
+        spyOn(dataSource, 'createUser').and.resolveTo();
 
         const res = await useCase.execute(mockUser);
 
@@ -114,7 +110,7 @@ describe('feature: manage-users', () => {
     describe('failure', () => {
       it('should return an error when the data source fails creating the user', async () => {
         mockUser = new UserEntity({ id: '1' });
-        dataSourceCreateUserSpy.and.throwError(new Error());
+        spyOn(dataSource, 'createUser').and.throwError(new Error());
 
         const res = await useCase.execute(mockUser);
 
@@ -123,7 +119,7 @@ describe('feature: manage-users', () => {
       });
       it('should return an error when the data source rejects the promise', async () => {
         mockUser = new UserEntity({ id: '1' });
-        dataSourceCreateUserSpy.and.rejectWith();
+        spyOn(dataSource, 'createUser').and.rejectWith();
 
         const res = await useCase.execute(mockUser);
 
@@ -136,7 +132,6 @@ describe('feature: manage-users', () => {
 
           const res = await useCase.execute(mockUser);
 
-          expect(dataSource.createUser).not.toHaveBeenCalled();
           expect(res).toBeInstanceOf(Error);
         });
         it('should return an error when the users id is undefined', async () => {
@@ -144,7 +139,6 @@ describe('feature: manage-users', () => {
 
           const res = await useCase.execute(mockUser);
 
-          expect(dataSource.createUser).not.toHaveBeenCalled();
           expect(res).toBeInstanceOf(Error);
         });
         it('should return an error when the users id is empty', async () => {
@@ -152,7 +146,6 @@ describe('feature: manage-users', () => {
 
           const res = await useCase.execute(mockUser);
 
-          expect(dataSource.createUser).not.toHaveBeenCalled();
           expect(res).toBeInstanceOf(Error);
         });
       });
@@ -161,10 +154,8 @@ describe('feature: manage-users', () => {
   describe('use case: delete user', () => {
     let useCase: DeleteUserUseCase;
     let mockUser: UserEntity;
-    let dataSourceDeleteUserSpy: jasmine.Spy;
     beforeEach(() => {
       useCase = TestBed.inject(DeleteUserUseCase);
-      dataSourceDeleteUserSpy = spyOn(dataSource, 'deleteUser');
     });
     it('should be defined', () => {
       expect(useCase).toBeDefined();
@@ -172,7 +163,7 @@ describe('feature: manage-users', () => {
     describe('success', () => {
       it('should delete the user', async () => {
         mockUser = new UserEntity({ id: '1' });
-        dataSourceDeleteUserSpy.and.resolveTo();
+        spyOn(dataSource, 'deleteUser').and.resolveTo();
 
         const res = await useCase.execute(mockUser);
 
@@ -183,7 +174,7 @@ describe('feature: manage-users', () => {
     describe('failure', () => {
       it('should return an error when the data source fails deleting the user', async () => {
         mockUser = new UserEntity({ id: '1' });
-        dataSourceDeleteUserSpy.and.throwError(new Error());
+        spyOn(dataSource, 'deleteUser').and.throwError(new Error());
 
         const res = await useCase.execute(mockUser);
 
@@ -192,7 +183,7 @@ describe('feature: manage-users', () => {
       });
       it('should return an error when the data source rejects the promise', async () => {
         mockUser = new UserEntity({ id: '1' });
-        dataSourceDeleteUserSpy.and.rejectWith();
+        spyOn(dataSource, 'deleteUser').and.rejectWith();
 
         const res = await useCase.execute(mockUser);
 
@@ -205,7 +196,6 @@ describe('feature: manage-users', () => {
 
           const res = await useCase.execute(mockUser);
 
-          expect(dataSource.deleteUser).not.toHaveBeenCalled();
           expect(res).toBeInstanceOf(Error);
         });
         it('should return an error when the users id is undefined', async () => {
@@ -213,7 +203,6 @@ describe('feature: manage-users', () => {
 
           const res = await useCase.execute(mockUser);
 
-          expect(dataSource.deleteUser).not.toHaveBeenCalled();
           expect(res).toBeInstanceOf(Error);
         });
         it('should return an error when the users id is empty', async () => {
@@ -221,7 +210,6 @@ describe('feature: manage-users', () => {
 
           const res = await useCase.execute(mockUser);
 
-          expect(dataSource.deleteUser).not.toHaveBeenCalled();
           expect(res).toBeInstanceOf(Error);
         });
       });
