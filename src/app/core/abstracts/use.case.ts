@@ -1,5 +1,5 @@
 import { Entity } from './entity';
 
-export abstract class UseCase<P extends Entity | void, R extends Entity | void> {
-  abstract execute(param: P): Promise<R | Error>;
+export abstract class UseCase<I extends Entity | void, O extends Entity | void> {
+  abstract execute(param: I): Promise<O | Error>;
 }
