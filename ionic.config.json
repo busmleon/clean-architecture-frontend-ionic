@@ -1,0 +1,7 @@
+{
+  "name": "clean-architecture-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
