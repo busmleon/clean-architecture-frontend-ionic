@@ -61,10 +61,17 @@ export class HomePageState {
   }
 
   @Action(HomePageDeleteUserAction)
-  async deleteUser({ patchState }: StateContext<HomePageStateModel>, { user }: HomePageDeleteUserAction) {
+  async deleteUser({ patchState, getState }: StateContext<HomePageStateModel>) {
+    const currentUser = getState().user;
+
+    if (!currentUser) {
+      patchState({ error: new Error('No user in state') });
+      return;
+    }
+
     patchState({ isLoading: true });
 
-    const res = await this.deleteUserUseCase.execute(user);
+    const res = await this.deleteUserUseCase.execute(currentUser);
 
     if (res instanceof Error) {
       patchState({

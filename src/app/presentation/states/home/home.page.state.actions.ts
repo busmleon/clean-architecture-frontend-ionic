@@ -6,7 +6,7 @@ export class HomePageCreateUserAction {
 }
 export class HomePageDeleteUserAction {
   static readonly type = '[HOME] delete user action';
-  constructor(public readonly user: UserEntity) { }
+  constructor() { }
 }
 export class HomePageGetUserAction {
   static readonly type = '[HOME] get user action';

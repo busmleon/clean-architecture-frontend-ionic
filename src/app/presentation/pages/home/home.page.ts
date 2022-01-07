@@ -21,7 +21,7 @@ export class HomePage {
   }
 
   deleteUser() {
-    this.store.dispatch(new HomePageDeleteUserAction({ id: '1' }));
+    this.store.dispatch(new HomePageDeleteUserAction());
   }
 
   getUser() {

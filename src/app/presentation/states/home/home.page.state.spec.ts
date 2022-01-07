@@ -114,9 +114,16 @@ describe('state: home', () => {
         isLoading: false,
         user: undefined
       };
+      store.reset({
+        ...store.snapshot(),
+        home: {
+          ...defaultHomePageStateModel,
+          user: mockUser
+        } as HomePageStateModel
+      });
       spyOn(deleteUserUseCase, 'execute').and.resolveTo();
 
-      await lastValueFrom(store.dispatch(new HomePageDeleteUserAction(mockUser)));
+      await lastValueFrom(store.dispatch(new HomePageDeleteUserAction()));
       const res = store.selectSnapshot(HomePageStateSelectors.stateModel);
 
       expect(deleteUserUseCase.execute).toHaveBeenCalledOnceWith(mockUser);
@@ -139,10 +146,23 @@ describe('state: home', () => {
       });
       spyOn(deleteUserUseCase, 'execute').and.resolveTo(mockError);
 
-      await lastValueFrom(store.dispatch(new HomePageDeleteUserAction(mockUser)));
+      await lastValueFrom(store.dispatch(new HomePageDeleteUserAction()));
       const res = store.selectSnapshot(HomePageStateSelectors.stateModel);
 
       expect(deleteUserUseCase.execute).toHaveBeenCalledOnceWith(mockUser);
+      expect(res).toEqual(expectedStateModel);
+    });
+    it('should write an error to the state if there is currently no user to be deleted', async () => {
+      const mockError = new Error('No user in state');
+      expectedStateModel = {
+        error: mockError,
+        isLoading: false,
+        user: undefined
+      };
+
+      await lastValueFrom(store.dispatch(new HomePageDeleteUserAction()));
+      const res = store.selectSnapshot(HomePageStateSelectors.stateModel);
+
       expect(res).toEqual(expectedStateModel);
     });
   });
