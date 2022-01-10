@@ -6,7 +6,11 @@
   "rules": {
     "prettier/prettier": "error",
     "no-alert": "error",
-    "no-debugger": "error"
+    "no-debugger": "error",
+    "no-warning-comments": [
+      "warn",
+      { "terms": ["todo"], "location": "anywhere" }
+    ]
   },
   "overrides": [
     {
