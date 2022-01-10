@@ -5,7 +5,7 @@ import { ManageUsersRepository } from './manage.users.repository';
 
 @Injectable()
 export class ManageUsersRepositoryImpl implements ManageUsersRepository {
-  constructor(private readonly dataSource: ManageUsersDataSource) { }
+  constructor(private readonly dataSource: ManageUsersDataSource) {}
 
   async createUser(user: UserEntity): Promise<void | Error> {
     try {

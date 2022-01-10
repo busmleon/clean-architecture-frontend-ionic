@@ -5,24 +5,27 @@ const routes: Routes = [
   //TODO: add auth guard
   {
     path: 'home',
-    loadChildren: () => import('./presentation/pages/home/home.page.module').then(m => m.HomePageModule)
+    loadChildren: () =>
+      import('./presentation/pages/home/home.page.module').then(
+        (m) => m.HomePageModule
+      ),
   },
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
     redirectTo: '',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

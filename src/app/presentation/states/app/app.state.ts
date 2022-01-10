@@ -7,4 +7,4 @@ import { AppStateModel, defaultAppStateModel } from './app.state.model';
   defaults: defaultAppStateModel,
 })
 @Injectable()
-export class AppState { }
+export class AppState {}

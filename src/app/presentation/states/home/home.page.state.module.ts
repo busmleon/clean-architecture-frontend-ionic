@@ -4,9 +4,6 @@ import { ManageUsersFeatureModule } from '../../../features/manage-users/manage.
 import { HomePageState } from './home.page.state';
 
 @NgModule({
-  imports: [
-    NgxsModule.forFeature([HomePageState]),
-    ManageUsersFeatureModule
-  ]
+  imports: [NgxsModule.forFeature([HomePageState]), ManageUsersFeatureModule],
 })
-export class HomePageStateModule { }
+export class HomePageStateModule {}

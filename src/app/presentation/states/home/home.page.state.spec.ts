@@ -7,8 +7,15 @@ import { CreateUserUseCase } from '../../../features/manage-users/use-cases/crea
 import { DeleteUserUseCase } from '../../../features/manage-users/use-cases/delete.user.use.case';
 import { GetUserUseCase } from '../../../features/manage-users/use-cases/get.user.use.case';
 import { HomePageState } from './home.page.state';
-import { HomePageCreateUserAction, HomePageDeleteUserAction, HomePageGetUserAction } from './home.page.state.actions';
-import { defaultHomePageStateModel, HomePageStateModel } from './home.page.state.model';
+import {
+  HomePageCreateUserAction,
+  HomePageDeleteUserAction,
+  HomePageGetUserAction,
+} from './home.page.state.actions';
+import {
+  defaultHomePageStateModel,
+  HomePageStateModel,
+} from './home.page.state.model';
 import { HomePageStateSelectors } from './home.page.state.selectors';
 
 describe('state: home', () => {
@@ -16,15 +23,12 @@ describe('state: home', () => {
   let expectedStateModel: HomePageStateModel;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        NgxsModule.forRoot([HomePageState]),
-        ManageUsersFeatureModule
-      ]
+      imports: [NgxsModule.forRoot([HomePageState]), ManageUsersFeatureModule],
     });
     store = TestBed.inject(Store);
     store.reset({
       ...store.snapshot(),
-      home: defaultHomePageStateModel
+      home: defaultHomePageStateModel,
     });
   });
   describe('action: create user', () => {
@@ -38,11 +42,13 @@ describe('state: home', () => {
       expectedStateModel = {
         errorMessage: undefined,
         isLoading: false,
-        user: mockUser
+        user: mockUser,
       };
       spyOn(createUserUseCase, 'execute').and.resolveTo();
 
-      await lastValueFrom(store.dispatch(new HomePageCreateUserAction(mockUser)));
+      await lastValueFrom(
+        store.dispatch(new HomePageCreateUserAction(mockUser))
+      );
       const res = store.selectSnapshot(HomePageStateSelectors.stateModel);
 
       expect(createUserUseCase.execute).toHaveBeenCalledOnceWith(mockUser);
@@ -53,11 +59,13 @@ describe('state: home', () => {
       expectedStateModel = {
         errorMessage: mockError.message,
         isLoading: false,
-        user: undefined
+        user: undefined,
       };
       spyOn(createUserUseCase, 'execute').and.resolveTo(mockError);
 
-      await lastValueFrom(store.dispatch(new HomePageCreateUserAction(mockUser)));
+      await lastValueFrom(
+        store.dispatch(new HomePageCreateUserAction(mockUser))
+      );
       const res = store.selectSnapshot(HomePageStateSelectors.stateModel);
 
       expect(createUserUseCase.execute).toHaveBeenCalledOnceWith(mockUser);
@@ -75,7 +83,7 @@ describe('state: home', () => {
       expectedStateModel = {
         errorMessage: undefined,
         isLoading: false,
-        user: mockUser
+        user: mockUser,
       };
       spyOn(getUserUseCase, 'execute').and.resolveTo(mockUser);
 
@@ -90,7 +98,7 @@ describe('state: home', () => {
       expectedStateModel = {
         errorMessage: mockError.message,
         isLoading: false,
-        user: undefined
+        user: undefined,
       };
       spyOn(getUserUseCase, 'execute').and.resolveTo(mockError);
 
@@ -112,14 +120,14 @@ describe('state: home', () => {
       expectedStateModel = {
         errorMessage: undefined,
         isLoading: false,
-        user: undefined
+        user: undefined,
       };
       store.reset({
         ...store.snapshot(),
         home: {
           ...defaultHomePageStateModel,
-          user: mockUser
-        } as HomePageStateModel
+          user: mockUser,
+        } as HomePageStateModel,
       });
       spyOn(deleteUserUseCase, 'execute').and.resolveTo();
 
@@ -135,14 +143,14 @@ describe('state: home', () => {
       expectedStateModel = {
         errorMessage: mockError.message,
         isLoading: false,
-        user: mockUser
+        user: mockUser,
       };
       store.reset({
         ...store.snapshot(),
         home: {
           ...defaultHomePageStateModel,
-          user: mockUser
-        } as HomePageStateModel
+          user: mockUser,
+        } as HomePageStateModel,
       });
       spyOn(deleteUserUseCase, 'execute').and.resolveTo(mockError);
 
@@ -157,7 +165,7 @@ describe('state: home', () => {
       expectedStateModel = {
         errorMessage: mockError.message,
         isLoading: false,
-        user: undefined
+        user: undefined,
       };
 
       await lastValueFrom(store.dispatch(new HomePageDeleteUserAction()));

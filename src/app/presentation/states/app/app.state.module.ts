@@ -3,8 +3,6 @@ import { NgxsModule } from '@ngxs/store';
 import { AppState } from './app.state';
 
 @NgModule({
-  imports: [
-    NgxsModule.forFeature([AppState])
-  ]
+  imports: [NgxsModule.forFeature([AppState])],
 })
-export class AppStateModule { }
+export class AppStateModule {}

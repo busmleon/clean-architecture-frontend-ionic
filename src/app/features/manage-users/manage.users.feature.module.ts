@@ -28,7 +28,7 @@ import { GetUserUseCase } from './use-cases/get.user.use.case';
     },
     GetUserUseCase,
     CreateUserUseCase,
-    DeleteUserUseCase
+    DeleteUserUseCase,
   ],
 })
-export class ManageUsersFeatureModule { }
+export class ManageUsersFeatureModule {}

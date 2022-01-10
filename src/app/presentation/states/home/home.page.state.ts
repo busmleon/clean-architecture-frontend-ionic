@@ -3,8 +3,15 @@ import { Action, State, StateContext } from '@ngxs/store';
 import { CreateUserUseCase } from '../../../features/manage-users/use-cases/create.user.use.case';
 import { DeleteUserUseCase } from '../../../features/manage-users/use-cases/delete.user.use.case';
 import { GetUserUseCase } from '../../../features/manage-users/use-cases/get.user.use.case';
-import { HomePageCreateUserAction, HomePageDeleteUserAction, HomePageGetUserAction } from './home.page.state.actions';
-import { defaultHomePageStateModel, HomePageStateModel } from './home.page.state.model';
+import {
+  HomePageCreateUserAction,
+  HomePageDeleteUserAction,
+  HomePageGetUserAction,
+} from './home.page.state.actions';
+import {
+  defaultHomePageStateModel,
+  HomePageStateModel,
+} from './home.page.state.model';
 
 @State<HomePageStateModel>({
   name: 'home',
@@ -15,12 +22,16 @@ export class HomePageState {
   constructor(
     private readonly getUserUseCase: GetUserUseCase,
     private readonly deleteUserUseCase: DeleteUserUseCase,
-    private readonly createUserUseCase: CreateUserUseCase,
-  ) { }
+    private readonly createUserUseCase: CreateUserUseCase
+  ) {}
 
   @Action(HomePageCreateUserAction)
-  async createUser({ patchState }: StateContext<HomePageStateModel>, { user }: HomePageCreateUserAction) {
+  async createUser(
+    { patchState }: StateContext<HomePageStateModel>,
+    { user }: HomePageCreateUserAction
+  ) {
     patchState({ isLoading: true });
+    console.log('test');
 
     const res = await this.createUserUseCase.execute(user);
 
@@ -28,13 +39,13 @@ export class HomePageState {
       patchState({
         errorMessage: res.message,
         isLoading: false,
-        user: undefined
+        user: undefined,
       });
     } else {
       patchState({
         errorMessage: undefined,
         isLoading: false,
-        user
+        user,
       });
     }
   }
@@ -49,13 +60,13 @@ export class HomePageState {
       patchState({
         errorMessage: res.message,
         isLoading: false,
-        user: undefined
+        user: undefined,
       });
     } else {
       patchState({
         errorMessage: undefined,
         isLoading: false,
-        user: res
+        user: res,
       });
     }
   }
@@ -66,7 +77,7 @@ export class HomePageState {
 
     if (!currentUser) {
       patchState({
-        errorMessage: 'No user in state'
+        errorMessage: 'No user in state',
       });
       return;
     }
@@ -84,7 +95,7 @@ export class HomePageState {
       patchState({
         errorMessage: undefined,
         isLoading: false,
-        user: undefined
+        user: undefined,
       });
     }
   }

@@ -9,8 +9,6 @@ import { AppComponent } from './app.component';
 import { AppState } from './presentation/states/app/app.state';
 import { AppStateModule } from './presentation/states/app/app.state.module';
 
-
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,11 +19,9 @@ import { AppStateModule } from './presentation/states/app/app.state.module';
     NgxsModule.forRoot([AppState], {
       developmentMode: !environment.production,
     }),
-    AppStateModule
+    AppStateModule,
   ],
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppComponentModule { }
+export class AppComponentModule {}
