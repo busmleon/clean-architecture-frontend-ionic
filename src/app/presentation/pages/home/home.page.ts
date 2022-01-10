@@ -16,7 +16,7 @@ import { HomePageStateSelectors } from '../../states/home/home.page.state.select
 })
 export class HomePage {
   @Select(HomePageStateSelectors.stateModel)
-  stateModel$: Observable<HomePageStateModel>;
+  stateModel$!: Observable<HomePageStateModel>;
 
   constructor(private readonly store: Store) {}
 
