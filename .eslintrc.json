@@ -4,7 +4,9 @@
   "plugins": ["prettier"],
   "ignorePatterns": ["projects/**/*"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-alert": "error",
+    "no-debugger": "error"
   },
   "overrides": [
     {
@@ -40,7 +42,8 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+        "no-console": ["error", {}]
       }
     },
     {
